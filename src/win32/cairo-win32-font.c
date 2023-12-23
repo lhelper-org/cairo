@@ -1405,7 +1405,7 @@ _cairo_win32_scaled_font_init_glyph_surface (cairo_win32_scaled_font_t *scaled_f
     width = x2 - x1;
     height = y2 - y1;
 
-    surface = cairo_win32_surface_create_with_dib (CAIRO_FORMAT_RGB24,
+    surface = cairo_win32_surface_create_with_dib (CAIRO_FORMAT_ARGB32,
 						   width, height);
     status = _cairo_surface_paint (surface, CAIRO_OPERATOR_SOURCE,
 				   &_cairo_pattern_white.base, NULL);

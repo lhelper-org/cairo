@@ -245,7 +245,7 @@ _cairo_win32_surface_emit_glyphs (cairo_win32_surface_t *dst,
 
     /* We can only handle opaque solid color sources and destinations */
     assert (_cairo_pattern_is_opaque_solid(source));
-    assert (dst->format == CAIRO_FORMAT_RGB24);
+    assert (dst->format == CAIRO_FORMAT_RGB24 || dst->format == CAIRO_FORMAT_ARGB32);
 
     solid_pattern = (cairo_solid_pattern_t *)source;
     color = RGB(((int)solid_pattern->color.red_short) >> 8,
