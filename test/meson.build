@@ -124,6 +124,7 @@ test_sources = [
   'device-offset-fractional.c',
   'device-offset-positive.c',
   'device-offset-scale.c',
+  'dithergradient.c',
   'error-setters.c',
   'extend-pad.c',
   'extend-pad-border.c',
@@ -190,6 +191,7 @@ test_sources = [
   'large-source.c',
   'large-source-roi.c',
   'large-twin-antialias-mixed.c',
+  'leaks.c',
   'leaky-dash.c',
   'leaky-dashed-rectangle.c',
   'leaky-dashed-stroke.c',
@@ -452,6 +454,10 @@ test_pdf_sources = [
   'pdf-tagged-text.c',
 ]
 
+test_pdf_structure_sources = [
+  'pdf-structure.c',
+]
+
 test_ps_sources = [
   'ps-eps.c',
   'ps-features.c',
@@ -555,6 +561,9 @@ endif
 
 if feature_conf.get('CAIRO_HAS_PDF_SURFACE', 0) == 1
   test_sources += test_pdf_sources
+  if host_machine.system() != 'windows'
+    test_sources += test_pdf_structure_sources
+  endif
   has_multipage_surfaces = true
   add_fallback_resolution = true
   build_any2ppm = true
@@ -653,7 +662,7 @@ foreach file : build_dir_files
 endforeach
 
 if build_machine.system() != 'windows'
-  run_command('ln', '-sf',
+  run_command('ln', '-sfn',
               meson.current_source_dir(),
               meson.current_build_dir() / 'srcdir',
               check: true)
