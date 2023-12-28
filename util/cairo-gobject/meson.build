@@ -26,6 +26,7 @@ pkgmod.generate(libcairogobject,
   libraries: [libcairo, glib_dep, gobject_dep],
   description: 'cairo-gobject for cairo graphics library',
   subdirs: [meson.project_name()],
+  extra_cflags: cairo_visibility_cflags,
 )
 
 meson.override_dependency('cairo-gobject', libcairogobject_dep)

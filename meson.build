@@ -809,6 +809,7 @@ foreach feature: built_features
   pkgmod.generate(libraries: [libcairo, feature_deps, feature_libs],
     name: feature['name'],
     description: feature['description'] + ' for cairo graphics library',
+    extra_cflags: cairo_visibility_cflags,
   )
   meson.override_dependency(feature['name'],
     declare_dependency(dependencies: [libcairo_dep, feature_deps, feature_compile_deps],

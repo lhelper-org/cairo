@@ -235,8 +235,10 @@ endforeach
 incsrc = include_directories('.')
 
 cairo_static_args = []
+cairo_visibility_cflags = []
 if get_option('default_library') == 'static' and host_machine.system() == 'windows'
   cairo_static_args += ['-DCAIRO_WIN32_STATIC_BUILD']
+  cairo_visibility_cflags += ['-DCAIRO_WIN32_STATIC_BUILD']
   add_project_arguments('-DCAIRO_WIN32_STATIC_BUILD', language: 'c')
 endif
 
@@ -264,6 +266,7 @@ libcairo_dep = declare_dependency(link_with: libcairo,
 pkgmod.generate(libcairo,
   description: 'Multi-platform 2D graphics library',
   subdirs: [meson.project_name()],
+  extra_cflags: cairo_visibility_cflags,
 )
 
 meson.override_dependency('cairo', libcairo_dep)

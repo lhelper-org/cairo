@@ -43,6 +43,7 @@ pkgmod.generate(libcairoscript,
   libraries: [libcairo],
   description: 'script surface backend for cairo graphics library',
   subdirs: [meson.project_name()],
+  extra_cflags: cairo_visibility_cflags,
 )
 
 meson.override_dependency('cairo-script-interpreter', libcairoscript_dep)
