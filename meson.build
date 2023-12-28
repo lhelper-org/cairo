@@ -68,7 +68,10 @@ if cc.get_id() != 'msvc'
     '-fno-common'
   ]
 
-  if get_option('optimization') in ['1', '2', '3']
+  # We disable FORTIFY_SOURCE on Windows because of:
+  # https://github.com/msys2/MINGW-packages/issues/5868
+  # The problem was actually observed with MSYS2 and TDM-GCC.
+  if get_option('optimization') in ['1', '2', '3'] and host_machine.system() != 'windows'
     cflags += '-Wp,-D_FORTIFY_SOURCE=2'
   endif
 
