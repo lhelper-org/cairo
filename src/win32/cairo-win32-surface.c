@@ -127,6 +127,14 @@ _cairo_win32_surface_get_extents (void		          *abstract_surface,
     return TRUE;
 }
 
+void
+cairo_win32_init (void)
+{
+#if CAIRO_MUTEX_IMPL_WIN32 && CAIRO_WIN32_STATIC_BUILD
+    CAIRO_MUTEX_INITIALIZE ();
+#endif
+}
+
 /**
  * cairo_win32_surface_get_dc:
  * @surface: a #cairo_surface_t

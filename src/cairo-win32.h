@@ -45,6 +45,8 @@
 
 CAIRO_BEGIN_DECLS
 
+cairo_public void cairo_win32_init (void);
+
 cairo_public cairo_surface_t *
 cairo_win32_surface_create (HDC hdc);
 
